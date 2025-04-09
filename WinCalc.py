@@ -11,7 +11,6 @@ def fnSubtracao():
     resultado =x-y
     lblResultado.config(text=f'A sua subtração é {resultado}')
 
-
 def fnMultiplicacao():
     x=float(entryNumero1.get())
     y=float(entryNumero2.get())
@@ -23,7 +22,6 @@ def fndivisao():
     y=float(entryNumero2.get())
     resultado =x/y
     lblResultado.config(text=f'A sua divisão é {resultado}')
-
 
 #Tk com T maiúsculo desenha uma janela. O tk minúsculo é o apelido da biblioteca para facilitar na programação.
 janela     = tk.Tk()
@@ -98,14 +96,6 @@ lblResultado = tk.Label(janela,
                       fg="white",
                       bg='#2f116e')
 lblResultado.pack(padx=5,pady  =5)
-
-
-
-
-
-
-
-
 
 
 
