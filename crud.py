@@ -1,7 +1,33 @@
 #crud é um sistema simples que pode fazer cadastro, adicionar, modificar, excluir e limpar...
 
 import  tkinter as tk #tk é o apelido para tkinter, para não escrever toda hora.
-from tkinter import ttk, messagebox #from, porque está importando duas ferramentas que estão dentro do tkinter.
+from tkinter import ttk, messagebox, filedialog 
+import json #from, porque está importando duas ferramentas que estão dentro do tkinter.
+
+def carregar_de_json():
+    global pets, next_pet_id
+    arquivo=filedialog.askopenfilename(filetypes=["Arquivos JSON","*.json"],
+    title="Selecionar arquivo JSON para carregar")
+
+    if not arquivo: #Se o usuário cancelar
+        return
+    try: 
+        with open(arquivo,'r', enconding='utf-8') as f: pets_carregados=json.load(f)
+
+#Atualiza a lista de pets e o próximo ID
+pets= pets_carregados
+    if pets:
+       next_pet_id=max(pet['id']for pet in pets)+1
+    else:
+        next_pet_id=1
+ 
+    carregar_pets()
+
+    messagebox.showinfo("Sucesso", f"Dados carregados com sucesso de:\n{arquivo}")
+
+    except Exception as e:
+    messagebox.showerror("Erro", f"Ocorreu um erro ao carregar:\n{str(e)}")
+
 
 
 #Otree.getchildre vai fazer o loop com for somente na parte do treeview. vai apagar cada item do treeview
