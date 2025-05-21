@@ -1,22 +1,22 @@
 import streamlit as st
 import json
-import os
+import os #Abre tudo o que utiliza o sistema windows ou vai salvar
 import datetime
 
 #nome do arquivo JSON
 ARQUIVO_DADOS ="pacientes.json"
 
 def carregar_dados():
-    if os.path.exists(ARQUIVO_DADOS):
-        with open(ARQUIVO_DADOS, "r") as f:
-            return json.load(f)
+    if os.path.exists(ARQUIVO_DADOS): #Vai verificar se o arquivo j.son existe
+        with open(ARQUIVO_DADOS, "r") as f:#pega todo o comando, lê o arquivo e salva na variável f - o "r" é de read, somente leitura
+            return json.load(f) #converte para leitura na estrutura json para o python fazer a leitura (Load)
     return{}
 
-def salvar_dados(dados):
-    with open(ARQUIVO_DADOS,"w") as f:
+def salvar_dados(dados): #Utf-8 é a cadeia de caracteres utilizados no Brasil
+    with open(ARQUIVO_DADOS,"w") as f: # "f" pega os daos da memória e salva os dados do arquivo json na memória permanentemente
         json.dump (dados, f, ensure_ascii=False, indent=4)
 
-def criar_paciente(nome, cpf, idade, data_nascimento, endereco, planodesaude):
+def criar_paciente(nome, cpf, idade, data_nascimento, endereco, planodesaude):#Só mostra a estruta que vai ser gravada os dados do formulário no arquivo json
     return{
         "cpf": cpf,
         "nome": nome,
@@ -26,7 +26,7 @@ def criar_paciente(nome, cpf, idade, data_nascimento, endereco, planodesaude):
         "planodesaude": planodesaude
     }
 
-st.set_page_config( page_title="Cadastro de Pacientes", page_icon="🏥", layout="wide",)
+st.set_page_config( page_title="Cadastro de Pacientes", page_icon="🏥", layout="wide",) #comando st é o streamlit
 
 # tem que dar 4 espaços em todo o programa dentro do cadastro, chamdo de indentação.
 def cadastrar_paciente():
@@ -100,7 +100,7 @@ def listar_pacientes():
         return
     
     for cpf, paciente in pacientes_filtrados:
-        with st.expander(f"{paciente['nome']} - CPF: {cpf}"):
+        with st.expander(f"{paciente['nome']} - CPF: {cpf}"): #Expander cria a caixinha com as informações cadastrdas
             col1, col2 = st.columns(2)
             
             with col1:
